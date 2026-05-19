@@ -270,6 +270,36 @@ const EXCUSES = [
     credibility: 90,
     tags: ["antivirus", "quarantine", "isolation"],
   },
+  {
+    text: "Sysadmin pulled all Linux dev boxes off the network — emergency kernel patch for a local privilege escalation. No ETA yet.",
+    category: "security",
+    credibility: 93,
+    tags: ["linux", "kernel", "privesc", "patch"],
+  },
+  {
+    text: "Our CI runners are offline — security team flagged a OverlayFS privesc (CopyFail / CVE-2023-0386) on the build nodes and yanked them for patching.",
+    category: "security",
+    credibility: 96,
+    tags: ["linux", "privesc", "copyfail", "cve", "ci"],
+  },
+  {
+    text: "Can't push anything right now — infra found a DirtyPipe-class exploit on our kernel version and the build servers are all getting emergency upgrades.",
+    category: "security",
+    credibility: 94,
+    tags: ["linux", "dirtypipe", "kernel", "privesc", "build"],
+  },
+  {
+    text: "Security scanner just lit up — our Linux boxes are vulnerable to the new nftables local privesc. All interactive logins are suspended pending the rollout.",
+    category: "security",
+    credibility: 91,
+    tags: ["linux", "nftables", "privesc", "lockout"],
+  },
+  {
+    text: "The sysadmin revoked my sudo while they audit which accounts got elevated during last night's pkexec privesc incident. Working on getting access back.",
+    category: "security",
+    credibility: 89,
+    tags: ["linux", "sudo", "pwnkit", "pkexec", "privesc"],
+  },
 
   // ── INFRA / VPN ───────────────────────────────────────────
   {
@@ -313,6 +343,36 @@ const EXCUSES = [
     category: "infra",
     credibility: 82,
     tags: ["sase", "routing", "latency"],
+  },
+  {
+    text: "GitHub is having an incident — push and pull are timing out across all our repos. Checking the status page now.",
+    category: "infra",
+    credibility: 95,
+    tags: ["github", "outage", "git"],
+  },
+  {
+    text: "GitHub Actions is down again — every pipeline is stuck queued with no runners picking up jobs. Whole release train is blocked.",
+    category: "infra",
+    credibility: 97,
+    tags: ["github", "actions", "ci", "outage"],
+  },
+  {
+    text: "GitHub's API keeps returning 503s, so our deployment pipeline can't tag the release or post status checks. Classic.",
+    category: "infra",
+    credibility: 93,
+    tags: ["github", "api", "deployment", "503"],
+  },
+  {
+    text: "Can't open or merge PRs right now — GitHub's web UI and API are both degraded. They just posted an incident on their status page.",
+    category: "infra",
+    credibility: 94,
+    tags: ["github", "outage", "pr", "status"],
+  },
+  {
+    text: "GitHub is down and taking half our tooling with it — package registry, Actions, and code review are all toast until they recover.",
+    category: "infra",
+    credibility: 96,
+    tags: ["github", "outage", "registry", "actions"],
   },
 ];
 
