@@ -688,6 +688,17 @@ a, button, input, select { transition: color var(--transition-interactive), back
     oklch(0 0 0 / 0.02) 4px
   );
 }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .hero {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      oklch(0 0 0 / 0.02) 2px,
+      oklch(0 0 0 / 0.02) 4px
+    );
+  }
+}
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 600px) {

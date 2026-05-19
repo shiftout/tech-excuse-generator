@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tech Excuse Generator — Late to the meeting? We've got you.</title>
   <meta name="description" content="Generate a bulletproof corporate tech excuse for being late to (or skipping) your next meeting." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23171614'/><text x='4' y='24' font-size='22' font-family='monospace'>💀</text></svg>" />
+  <!-- Restore saved theme before CSS paints to avoid flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();</script>
   <!-- Fonts -->
   <link href="https://api.fontshare.com/v2/css?f[]=jet-brains-mono@400,700&f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -33,7 +35,7 @@
         <button class="btn-ghost" id="historyToggle" aria-label="View excuse history" title="History">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"/><path d="M3 10h18v4H3z"/><path d="M3 17h10v4H3z"/></svg>
         </button>
-        <button class="btn-ghost" data-theme-toggle aria-label="Switch to light mode">
+        <button class="btn-ghost" data-theme-toggle aria-label="Toggle theme">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         </button>
       </nav>

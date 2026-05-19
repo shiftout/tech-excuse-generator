@@ -249,25 +249,47 @@
   });
 
   // ── Theme Toggle ───────────────────────────────────────────
+  // Cycles: auto (system) → light → dark → auto
   (function () {
     const root = document.documentElement;
-    let d = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    root.setAttribute("data-theme", d);
-    updateThemeIcon(d);
+    const mq = matchMedia("(prefers-color-scheme: dark)");
+    // null = follow system; "light" | "dark" = manual override
+    let mode = localStorage.getItem("theme") || null;
 
-    themeToggle &&
-      themeToggle.addEventListener("click", () => {
-        d = d === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", d);
-        updateThemeIcon(d);
-      });
+    applyMode(mode);
+    mq.addEventListener("change", () => { if (mode === null) updateThemeIcon(null); });
 
-    function updateThemeIcon(theme) {
+    themeToggle && themeToggle.addEventListener("click", () => {
+      if (mode === null)        mode = "light";
+      else if (mode === "light") mode = "dark";
+      else                       mode = null;
+      applyMode(mode);
+    });
+
+    function applyMode(m) {
+      if (m === "dark" || m === "light") {
+        root.setAttribute("data-theme", m);
+        localStorage.setItem("theme", m);
+      } else {
+        root.removeAttribute("data-theme");
+        localStorage.removeItem("theme");
+      }
+      updateThemeIcon(m);
+    }
+
+    function updateThemeIcon(m) {
       if (!themeToggle) return;
-      themeToggle.innerHTML =
-        theme === "dark"
-          ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`
-          : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+      const isDark = m === "dark" || (m === null && mq.matches);
+      if (m === null) {
+        themeToggle.setAttribute("aria-label", "Theme: auto — click to override");
+        themeToggle.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`;
+      } else if (isDark) {
+        themeToggle.setAttribute("aria-label", "Theme: dark — click for light");
+        themeToggle.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
+      } else {
+        themeToggle.setAttribute("aria-label", "Theme: light — click for dark");
+        themeToggle.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+      }
     }
   })();
 
