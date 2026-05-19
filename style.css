@@ -676,6 +676,7 @@ a, button, input, select { transition: color var(--transition-interactive), back
   max-width: unset;
 }
 .footer-hint { color: var(--color-text-muted); }
+.footer-meta { margin-top: var(--space-1); opacity: 0.6; }
 
 /* ── Terminal scan-line effect (dark mode only) ──────────── */
 [data-theme='dark'] .hero {
